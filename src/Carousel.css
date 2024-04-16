@@ -1,0 +1,8 @@
+.carousel-slide img {
+  border: 1px solid;
+  height: 80vh;
+}
+.carousel-container {
+  background-image: url("https://removal.ai/wp-content/uploads/2021/05/image1.png");
+  background-size: cover;
+}
