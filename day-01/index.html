@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moon Resolution App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        background-color: black;
+        height: 100vh;
+        text-align: center;
+        padding: 20px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        justify-content: space-between;
+        /* gap: 10vw; */
+      }
+      select,
+      option {
+        padding: 10px 20px;
+        width: 20%;
+        margin: auto;
+      }
+      .image {
+        /* height: 50%; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      #crushPic {
+        height: 100%;
+        border: 2px dashed pink;
+        padding: 10px;
+        border-radius: 10px;
+        transition: all 0.3s;
+        /* opacity: 0; */
+        height: 100%;
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      }
+      @media screen and (max-width: 600px) {
+        .image {
+          width: 80%;
+        }
+
+        select,
+        option {
+          padding: 10px 20px;
+          width: 70%;
+          margin: auto;
+        }
+      }
+      @media screen and (min-width: 600px) {
+        .image {
+          width: 30%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Change the reslution to see the moon</h3>
+      <div class="image">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4vnE5PuyeAORNJKHRwlD_gQ5BbvsaMg6iww&amp;usqp=CAU"
+          alt="crushPic"
+          style="width: 100%"
+          id="crushPic"
+        />
+      </div>
+      <select name="" id="selectElem">
+        <option value="144">144p</option>
+        <option value="270">270p</option>
+        <option value="360">360p</option>
+        <option value="480">480p</option>
+        <option value="720">720p</option>
+        <option value="1080">1080p</option>
+      </select>
+    </div>
+  </body>
+</html>
+<script>
+  let moonImgArr = [
+    "https://img.freepik.com/premium-vector/pixel-art-illustration-moon-pixelated-moon-shiny-moon-pixelated-pixel-art-game_1038602-173.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSpTENVz2WkUwyKnXJ7wuSC_yp5BiGG7ulfysIoxuizcuDxR-IUVIaKobl_SkCzQr-u7E&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW5k1OIqv6LoPaF91OHdbMxhILyNE10JS5kA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrp9ODVLt8HsMdQ60s8pC7JbfARdHqzAHRFw&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-aw4RkGo4QuLtIcdoOH5x3Np56dpuAYqTRQ&usqp=CAU",
+  ];
+
+  let crushPicArr = [
+    "https://i.postimg.cc/LXP9pcS5/IMG-20240416-WA0006.jpg",
+    "https://i.postimg.cc/KcnGshQs/IMG-20240416-WA0007.jpg",
+    "https://i.postimg.cc/FzQ9sTFZ/IMG-20240416-WA0008.jpg",
+    "https://i.postimg.cc/PJzdL1Pk/IMG-20240416-WA0009.jpg",
+    "https://i.postimg.cc/X7LV4KRf/9792a5182e2aa85e988482aa7d4baf84.jpg",
+  ];
+
+  let imgElem = document.getElementById("crushPic");
+  let intervalId;
+
+  function handleChange() {
+    let currInd = 0;
+    switch (this.value) {
+      case "144":
+        clearInterval(intervalId);
+        imgElem.src = moonImgArr[0];
+        break;
+      case "270":
+        clearInterval(intervalId);
+        imgElem.src = moonImgArr[1];
+        break;
+      case "360":
+        clearInterval(intervalId);
+        imgElem.src = moonImgArr[2];
+        break;
+      case "480":
+        clearInterval(intervalId);
+        imgElem.src = moonImgArr[3];
+        break;
+      case "720":
+        clearInterval(intervalId);
+        imgElem.src = moonImgArr[4];
+        break;
+      case "1080":
+        intervalId = setInterval(() => {
+          imgElem.style.opacity = 0;
+          if (currInd == crushPicArr.length - 1) {
+            currInd = 0;
+          }
+          imgElem.src = crushPicArr[currInd++];
+          imgElem.style.opacity = 1;
+        }, 1000);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  function transitionImages() {
+    let currInd = 0;
+    setInterval(() => {
+      imgElem.style.opacity = 0;
+      if (currInd == crushPicArr.length - 1) {
+        currInd = 0;
+      }
+      imgElem.src = crushPicArr[currInd++];
+      imgElem.style.opacity = 1;
+    }, 1000);
+  }
+
+  document
+    .getElementById("selectElem")
+    .addEventListener("change", handleChange);
+</script>
